@@ -8,6 +8,8 @@ public class PlayerMovemend : MonoBehaviour
     Rigidbody rb;
     public float forwardForce = 2000f;
     public float sidewaysForse = 500f;
+    public KeyCode ToTheRight = KeyCode.D;
+    public KeyCode ToTheLeft = KeyCode.A;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -15,11 +17,11 @@ public class PlayerMovemend : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(0, 0, forwardForce * Time.deltaTime);
-        if (Input.GetKey("d"))
+        if (Input.GetKey(ToTheRight))
         {
             rb.AddForce(sidewaysForse * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey(ToTheLeft))
         {
             rb.AddForce(-sidewaysForse * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }

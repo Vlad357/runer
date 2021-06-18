@@ -10,7 +10,7 @@ public class PlayetCollision : MonoBehaviour
         movemend = GetComponent<PlayerMovemend>();
     }
     void OnCollisionEnter(Collision obj){
-    	if(obj.collider.tag == "Reload"){
+    	if(obj.collider.CompareTag ("Reload")){
             movemend.enabled = false;
             FindObjectOfType<GameManager>().EndGame();
              
