@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         path = Path.Combine(Application.dataPath, "SaveGames.json");
         if (!File.Exists(path))SG.Coin = 0;
         else
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
                 pauseMenuUI.SetActive(true);
                 Time.timeScale = 0;
                 PauseGame = true;
+                Save();
             }
             else
             {
