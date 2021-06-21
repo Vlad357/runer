@@ -8,8 +8,9 @@ public class PlayerMovemend : MonoBehaviour
     Rigidbody rb;
     public float forwardForce = 2000f;
     public float sidewaysForse = 500f;
-    public KeyCode ToTheRight = KeyCode.D;
-    public KeyCode ToTheLeft = KeyCode.A;
+    public string ToTheRight { set; private get; }
+    public string ToTheLeft { set; private get; }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

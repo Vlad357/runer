@@ -1,13 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Credits : MonoBehaviour
 {
-    public GameObject panel;
+    public Animator anim;
+    public GameObject settigspanel;
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Level01");
+    }
     public void ContinueGame()
     {
         Time.timeScale = 1;
-        panel.SetActive(false);
+        gameObject.SetActive(false);
+    }
+    public void Settings()
+    {
+        gameObject.SetActive(false);
+        settigspanel.SetActive(true);
     }
     public void ToMainManu()
     {
@@ -16,9 +27,5 @@ public class Credits : MonoBehaviour
     public void Quid()
     {
         Application.Quit();
-    }
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Level01");
     }
 }

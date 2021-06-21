@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 using System;
 using System.IO;
 
@@ -7,25 +9,44 @@ public class GameManager : MonoBehaviour
 {
     private bool PauseGame = false;
     private bool EndTheGame = false;
-    private SaveGame SG = new SaveGame();
     private string path;
 
+    public static SaveGame SG = new SaveGame();
     public GameObject complateLevelUI;
     public GameObject pauseMenuUI;
+    public Text RightSettings;
+    public Text LeftSettings;
     public int CountCoin { get; private set; }
 
     private void Start()
     {
         Time.timeScale = 1;
         path = Path.Combine(Application.dataPath, "SaveGames.json");
-        if (!File.Exists(path))SG.Coin = 0;
+        if (!File.Exists(path))
+        {
+            SG.Coin = 0;
+            SG.StringToTheRight = "d";
+            FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
+            SG.StringToTheLeft = "a";
+            FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft;
+        }
         else
         {
             SG = JsonUtility.FromJson<SaveGame>(File.ReadAllText(path));
             CountCoin = SG.Coin;
+            if (SG.StringToTheRight != null && SG.StringToTheLeft != null)
+            {
+                if (SG.StringToTheRight != null)
+                {
+                    FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
+                }
+                if (SG.StringToTheLeft != null) 
+                {
+                    FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft; 
+                }
+            }
         }
     }
-    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -45,20 +66,21 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-   
-
+    public void MovRaL()
+    {
+        RightSettings.text = SG.StringToTheRight;
+        LeftSettings.text = SG.StringToTheLeft;
+    }
     private void Save()
     {
         File.WriteAllText(path, JsonUtility.ToJson(SG));
     }
-
     public void CollectACoin()
     {
         SG.Coin += 1;
         CountCoin = SG.Coin;
         Debug.Log(SG.Coin);
     }
-
     public void CompleteLevel()
     {
         complateLevelUI.SetActive(true);
@@ -84,7 +106,6 @@ public class GameManager : MonoBehaviour
 public class SaveGame
 {
     public int Coin;
-    public KeyCode ToTheRight;
-    public KeyCode ToTheLeft;
-    public KeyCode OnPause;
+    public string StringToTheRight;
+    public string StringToTheLeft;
 }
