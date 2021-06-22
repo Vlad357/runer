@@ -378,7 +378,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3f67223367b08d4a88c77af79c940b9, type: 3}
-    m_FontSize: 15
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -993,7 +993,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 255045074}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: CheckLeftButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1478,7 +1490,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3f67223367b08d4a88c77af79c940b9, type: 3}
-    m_FontSize: 15
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1726,14 +1738,14 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3f67223367b08d4a88c77af79c940b9, type: 3}
-    m_FontSize: 15
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -3306,10 +3318,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51982299943a004083ced3efc329c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SG:
+    Coin: 0
+    StringToTheRight: 
+    StringToTheLeft: 
   complateLevelUI: {fileID: 1401020088}
   pauseMenuUI: {fileID: 343672220}
-  RightSettings: {fileID: 126393044}
-  LeftSettings: {fileID: 615219586}
+  SettindsMenuUI: {fileID: 255045069}
+  RightBtns: {fileID: 674236426}
+  LeftBtns: {fileID: 1617122499}
 --- !u!4 &1554201294
 Transform:
   m_ObjectHideFlags: 0
@@ -3383,7 +3400,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3f67223367b08d4a88c77af79c940b9, type: 3}
-    m_FontSize: 15
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3575,7 +3592,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 255045074}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: CheckRichtButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

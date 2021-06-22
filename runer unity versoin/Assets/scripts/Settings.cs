@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +8,12 @@ using UnityEngine.UIElements;
 
 public class Settings : MonoBehaviour
 {
-    private void OnEnable()
+    public void CheckRichtButton(string btn)
     {
-        FindObjectOfType<GameManager>().MovRaL();
+        if (btn.Length == 1) FindObjectOfType<GameManager>().BtnsRight(btn);
+    }
+    public void CheckLeftButton(string btn)
+    {
+        if (btn.Length == 1) FindObjectOfType<GameManager>().BtnsLeft(btn);
     }
 }

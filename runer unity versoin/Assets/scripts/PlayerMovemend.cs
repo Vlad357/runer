@@ -8,8 +8,8 @@ public class PlayerMovemend : MonoBehaviour
     Rigidbody rb;
     public float forwardForce = 2000f;
     public float sidewaysForse = 500f;
-    public string ToTheRight { set; private get; }
-    public string ToTheLeft { set; private get; }
+    public string ToTheRight = "d";
+    public string ToTheLeft = "a";
 
     void Start()
     {

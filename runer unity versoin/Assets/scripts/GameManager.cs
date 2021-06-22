@@ -8,14 +8,16 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     private bool PauseGame = false;
+    private bool SettingMenu = false;
     private bool EndTheGame = false;
     private string path;
 
-    public static SaveGame SG = new SaveGame();
+    public SaveGame SG = new SaveGame();
     public GameObject complateLevelUI;
     public GameObject pauseMenuUI;
-    public Text RightSettings;
-    public Text LeftSettings;
+    public GameObject SettindsMenuUI;
+    public GameObject RightBtns;
+    public GameObject LeftBtns;
     public int CountCoin { get; private set; }
 
     private void Start()
@@ -25,10 +27,8 @@ public class GameManager : MonoBehaviour
         if (!File.Exists(path))
         {
             SG.Coin = 0;
-            SG.StringToTheRight = "d";
-            FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
-            SG.StringToTheLeft = "a";
-            FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft;
+            SG.StringToTheRight = FindObjectOfType<PlayerMovemend>().ToTheRight;
+            SG.StringToTheLeft = FindObjectOfType<PlayerMovemend>().ToTheLeft;
         }
         else
         {
@@ -38,11 +38,13 @@ public class GameManager : MonoBehaviour
             {
                 if (SG.StringToTheRight != null)
                 {
+                    RightBtns.GetComponent<Text>().text = SG.StringToTheRight;
                     FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
                 }
                 if (SG.StringToTheLeft != null) 
                 {
-                    FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft; 
+                    LeftBtns.GetComponent<Text>().text = SG.StringToTheLeft;
+                    FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft;
                 }
             }
         }
@@ -51,12 +53,17 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!PauseGame)
+            if (!PauseGame && Time.timeScale ==1)
             {
                 pauseMenuUI.SetActive(true);
                 Time.timeScale = 0;
                 PauseGame = true;
                 Save();
+            }
+            if (!SettingMenu)
+            {
+                SettindsMenuUI.SetActive(false);
+                pauseMenuUI.SetActive(true);
             }
             else
             {
@@ -66,10 +73,15 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void MovRaL()
+    public void BtnsRight(string Right)
     {
-        RightSettings.text = SG.StringToTheRight;
-        LeftSettings.text = SG.StringToTheLeft;
+        SG.StringToTheRight = Right;
+        Save();
+    }
+    public void BtnsLeft(string Left)
+    {
+        SG.StringToTheLeft = Left;
+        Save();
     }
     private void Save()
     {
@@ -79,7 +91,6 @@ public class GameManager : MonoBehaviour
     {
         SG.Coin += 1;
         CountCoin = SG.Coin;
-        Debug.Log(SG.Coin);
     }
     public void CompleteLevel()
     {
@@ -98,6 +109,7 @@ public class GameManager : MonoBehaviour
     }
     void Restart()
     {
+        Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
