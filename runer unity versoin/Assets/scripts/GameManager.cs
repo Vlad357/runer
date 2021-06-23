@@ -7,17 +7,19 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+
+    public SaveGame SG = new SaveGame();
+    public GameObject ComplateLevelUI;
+    public GameObject PauseMenuUI;
+    public GameObject SettindsMenuUI;
+    public GameObject RightBtns;
+    public GameObject LeftBtns;
+
     private bool PauseGame = false;
     private bool SettingMenu = false;
     private bool EndTheGame = false;
     private string path;
 
-    public SaveGame SG = new SaveGame();
-    public GameObject complateLevelUI;
-    public GameObject pauseMenuUI;
-    public GameObject SettindsMenuUI;
-    public GameObject RightBtns;
-    public GameObject LeftBtns;
     public int CountCoin { get; private set; }
 
     private void Start()
@@ -34,18 +36,15 @@ public class GameManager : MonoBehaviour
         {
             SG = JsonUtility.FromJson<SaveGame>(File.ReadAllText(path));
             CountCoin = SG.Coin;
-            if (SG.StringToTheRight != null && SG.StringToTheLeft != null)
+            if (SG.StringToTheRight != null)
             {
-                if (SG.StringToTheRight != null)
-                {
-                    RightBtns.GetComponent<Text>().text = SG.StringToTheRight;
-                    FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
-                }
-                if (SG.StringToTheLeft != null) 
-                {
-                    LeftBtns.GetComponent<Text>().text = SG.StringToTheLeft;
-                    FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft;
-                }
+                RightBtns.GetComponent<Text>().text = SG.StringToTheRight;
+                FindObjectOfType<PlayerMovemend>().ToTheRight = SG.StringToTheRight;
+            }
+            if (SG.StringToTheLeft != null) 
+            {
+                LeftBtns.GetComponent<Text>().text = SG.StringToTheLeft;
+                FindObjectOfType<PlayerMovemend>().ToTheLeft = SG.StringToTheLeft;
             }
         }
     }
@@ -55,7 +54,7 @@ public class GameManager : MonoBehaviour
         {
             if (!PauseGame && Time.timeScale ==1)
             {
-                pauseMenuUI.SetActive(true);
+                PauseMenuUI.SetActive(true);
                 Time.timeScale = 0;
                 PauseGame = true;
                 Save();
@@ -63,11 +62,11 @@ public class GameManager : MonoBehaviour
             if (!SettingMenu)
             {
                 SettindsMenuUI.SetActive(false);
-                pauseMenuUI.SetActive(true);
+                PauseMenuUI.SetActive(true);
             }
             else
             {
-                pauseMenuUI.SetActive(false);
+                PauseMenuUI.SetActive(false);
                 Time.timeScale = 1;
                 PauseGame = false;
             }
@@ -94,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
     public void CompleteLevel()
     {
-        complateLevelUI.SetActive(true);
+        ComplateLevelUI.SetActive(true);
         Save();
     }
     public void EndGame()
@@ -109,8 +108,8 @@ public class GameManager : MonoBehaviour
     }
     void Restart()
     {
-        Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Save();
     }
 }
 
